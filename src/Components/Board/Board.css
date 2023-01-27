@@ -1,0 +1,20 @@
+.board-container {
+  height: 60vh;
+  width: 60vh;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-columns: 1fr 1fr 1fr;
+  background-color: rgb(173, 163, 163);
+  margin: 0 auto;
+  border-radius: 10px;
+}
+
+.outline {
+  display: flex;
+  justify-content: center;
+  flex-flow: column wrap;
+  background-image: linear-gradient(to top, #cfd9df 0%, #e2ebf0 100%);
+  box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.3);
+  width: fit-content;
+  padding: 20px;
+}
