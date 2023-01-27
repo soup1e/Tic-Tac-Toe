@@ -50,23 +50,19 @@ const UserProvider = ({ children }) => {
     if (content === 'X' || content === 'O') {
       return;
     }
-
+    // Check if game is active
+    if (!active) {
+      return;
+    }
+    // Check if space are same than sets content to currentPlayer
     setBoxes((board) => {
       return board.map((newBox) => {
         return newBox.space === space ? { ...newBox, content: currentPlayer } : newBox;
       });
     });
-
-    switchTurn();
+    // Ternary to change currentPlayer
+    setCurrentPlayer(currentPlayer === 'X' ? 'O' : 'X');
   };
-
-  function switchTurn() {
-    if (currentPlayer === 'O') {
-      setCurrentPlayer('X');
-    } else {
-      setCurrentPlayer('O');
-    }
-  }
 
   return (
     <UserContext.Provider
@@ -80,7 +76,6 @@ const UserProvider = ({ children }) => {
         gameMessage,
         setGameMessage,
         setSpace,
-        switchTurn,
       }}
     >
       {children}
