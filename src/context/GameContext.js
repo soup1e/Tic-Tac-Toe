@@ -45,6 +45,29 @@ const UserProvider = ({ children }) => {
     },
   ]);
 
+  const setSpace = (space, content) => {
+    // Check if the space already contains an 'X' or 'O'
+    if (content === 'X' || content === 'O') {
+      return;
+    }
+
+    setBoxes((board) => {
+      return board.map((newBox) => {
+        return newBox.space === space ? { ...newBox, content: currentPlayer } : newBox;
+      });
+    });
+
+    switchTurn();
+  };
+
+  function switchTurn() {
+    if (currentPlayer === 'O') {
+      setCurrentPlayer('X');
+    } else {
+      setCurrentPlayer('O');
+    }
+  }
+
   return (
     <UserContext.Provider
       value={{
@@ -56,6 +79,8 @@ const UserProvider = ({ children }) => {
         setActive,
         gameMessage,
         setGameMessage,
+        setSpace,
+        switchTurn,
       }}
     >
       {children}
