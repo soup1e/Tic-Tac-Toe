@@ -64,6 +64,18 @@ const UserProvider = ({ children }) => {
     setCurrentPlayer(currentPlayer === 'X' ? 'O' : 'X');
   };
 
+  const resetGame = () => {
+    setBoxes((resetBoard) => {
+      return resetBoard.map((box) => {
+        return { ...box, content: '' };
+      });
+    });
+
+    setGameMessage('');
+    setCurrentPlayer('X');
+    setActive(true);
+  };
+
   const checkGame = () => {
     if (!active) return;
     const winner = checkWinner();
@@ -154,6 +166,7 @@ const UserProvider = ({ children }) => {
         setGameMessage,
         setSpace,
         checkGame,
+        resetGame,
       }}
     >
       {children}

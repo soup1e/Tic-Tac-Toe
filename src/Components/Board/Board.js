@@ -1,6 +1,7 @@
 import React, { useContext } from 'react';
 import './Board.css';
 import Box from '../Box/Box.js';
+import Reset from '../Reset/Reset.js';
 
 import { UserContext } from '../../context/GameContext.js';
 
@@ -17,6 +18,8 @@ export default function Board() {
             <Box key={box.space} space={box.space} content={box.content} />
           ))}
         </div>
+
+        <Reset />
       </div>
     </>
   );

@@ -1,15 +1,45 @@
 .space {
+  min-height: 200px;
+  min-width: 200px;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 48px;
+  font-size: 150px;
   font-weight: bold;
-  background-color: rgb(246, 243, 243);
-  border: 1px solid #333;
   transition: background-color 0.3s ease;
 }
 
 .space:hover {
-  background-color: rgba(238, 238, 238, 0.188);
+  background-color: rgba(0, 0, 0, 0.188);
   cursor: pointer;
+}
+
+.space1 {
+  border-right: 10px solid black;
+  border-bottom: 10px solid black;
+}
+.space2 {
+  border-bottom: 10px solid black;
+}
+.space3 {
+  border-left: 10px solid black;
+  border-bottom: 10px solid black;
+}
+.space4 {
+  border-right: 10px solid black;
+  border-bottom: 10px solid black;
+}
+
+.space5 {
+  border-bottom: 10px solid black;
+}
+.space6 {
+  border-left: 10px solid black;
+  border-bottom: 10px solid black;
+}
+.space7 {
+  border-right: 10px solid black;
+}
+.space9 {
+  border-left: 10px solid black;
 }

@@ -7,7 +7,7 @@ export default function Box({ space, content }) {
   const { setSpace } = useContext(UserContext);
   return (
     <div
-      className="space"
+      className={`space${space} space`}
       onClick={() => {
         setSpace(space, content);
       }}
