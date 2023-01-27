@@ -3,6 +3,9 @@ import { useState, createContext } from 'react';
 const UserContext = createContext();
 
 const UserProvider = ({ children }) => {
+  const [currentPlayer, setCurrentPlayer] = useState('X');
+  const [active, setActive] = useState(true);
+  const [gameMessage, setGameMessage] = useState('');
   const [boxes, setBoxes] = useState([
     {
       space: 1,
@@ -42,7 +45,22 @@ const UserProvider = ({ children }) => {
     },
   ]);
 
-  return <UserContext.Provider value={{ boxes, setBoxes }}>{children}</UserContext.Provider>;
+  return (
+    <UserContext.Provider
+      value={{
+        boxes,
+        setBoxes,
+        currentPlayer,
+        setCurrentPlayer,
+        active,
+        setActive,
+        gameMessage,
+        setGameMessage,
+      }}
+    >
+      {children}
+    </UserContext.Provider>
+  );
 };
 
 export { UserProvider, UserContext };
