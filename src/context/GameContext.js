@@ -6,6 +6,10 @@ const UserProvider = ({ children }) => {
   const [currentPlayer, setCurrentPlayer] = useState('X');
   const [active, setActive] = useState(true);
   const [gameMessage, setGameMessage] = useState('');
+  const [knotWins, setKnotWins] = useState(0);
+  const [crossWins, setCrossWins] = useState(0);
+  const [total, setTotal] = useState(0);
+
   const [boxes, setBoxes] = useState([
     {
       space: 1,
@@ -82,11 +86,13 @@ const UserProvider = ({ children }) => {
     if (winner) {
       setActive(false);
       setGameMessage(`${winner} wins`);
+      setTotal((total) => total + 1);
     } else {
       const checkCatsGame = boxes.every((box) => box.content);
       if (checkCatsGame) {
         setActive(false);
         setGameMessage('Cats game!');
+        setTotal((total) => total + 1);
       }
     }
   };
@@ -94,57 +100,73 @@ const UserProvider = ({ children }) => {
   const checkWinner = () => {
     // horizontal x
     if (boxes[0].content === 'X' && boxes[1].content === 'X' && boxes[2].content === 'X') {
+      setCrossWins((crossWins) => crossWins + 1);
       return 'X';
     }
     if (boxes[3].content === 'X' && boxes[4].content === 'X' && boxes[5].content === 'X') {
+      setCrossWins((crossWins) => crossWins + 1);
       return 'X';
     }
     if (boxes[6].content === 'X' && boxes[7].content === 'X' && boxes[8].content === 'X') {
+      setCrossWins((crossWins) => crossWins + 1);
       return 'X';
     }
     // vertical x
     if (boxes[0].content === 'X' && boxes[3].content === 'X' && boxes[6].content === 'X') {
+      setCrossWins((crossWins) => crossWins + 1);
       return 'X';
     }
     if (boxes[1].content === 'X' && boxes[4].content === 'X' && boxes[7].content === 'X') {
+      setCrossWins((crossWins) => crossWins + 1);
       return 'X';
     }
     if (boxes[2].content === 'X' && boxes[5].content === 'X' && boxes[8].content === 'X') {
+      setCrossWins((crossWins) => crossWins + 1);
       return 'X';
     }
     // diagonal  x
     if (boxes[0].content === 'X' && boxes[4].content === 'X' && boxes[8].content === 'X') {
+      setCrossWins((crossWins) => crossWins + 1);
       return 'X';
     }
     if (boxes[2].content === 'X' && boxes[4].content === 'X' && boxes[6].content === 'X') {
+      setCrossWins((crossWins) => crossWins + 1);
       return 'X';
     }
 
     // horizontal o
     if (boxes[0].content === 'O' && boxes[1].content === 'O' && boxes[2].content === 'O') {
+      setKnotWins((knotWins) => knotWins + 1);
       return 'O';
     }
     if (boxes[3].content === 'O' && boxes[4].content === 'O' && boxes[5].content === 'O') {
+      setKnotWins((knotWins) => knotWins + 1);
       return 'O';
     }
     if (boxes[6].content === 'O' && boxes[7].content === 'O' && boxes[8].content === 'O') {
+      setKnotWins((knotWins) => knotWins + 1);
       return 'O';
     }
     // vertical o
     if (boxes[0].content === 'O' && boxes[3].content === 'O' && boxes[6].content === 'O') {
+      setKnotWins((knotWins) => knotWins + 1);
       return 'O';
     }
     if (boxes[1].content === 'O' && boxes[4].content === 'O' && boxes[7].content === 'O') {
+      setKnotWins((knotWins) => knotWins + 1);
       return 'O';
     }
     if (boxes[2].content === 'O' && boxes[5].content === 'O' && boxes[8].content === 'O') {
+      setKnotWins((knotWins) => knotWins + 1);
       return 'O';
     }
     // diagonal  o
     if (boxes[0].content === 'O' && boxes[4].content === 'O' && boxes[8].content === 'O') {
+      setKnotWins((knotWins) => knotWins + 1);
       return 'O';
     }
     if (boxes[2].content === 'O' && boxes[4].content === 'O' && boxes[6].content === 'O') {
+      setKnotWins((knotWins) => knotWins + 1);
       return 'O';
     }
 
@@ -167,6 +189,9 @@ const UserProvider = ({ children }) => {
         setSpace,
         checkGame,
         resetGame,
+        knotWins,
+        crossWins,
+        total,
       }}
     >
       {children}

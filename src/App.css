@@ -5,6 +5,22 @@ body {
   justify-content: center;
   height: 100vh;
   background-image: linear-gradient(135deg, #fdfcfb 0%, #e2d1c3 100%);
-
   font-family: 'Raleway', sans-serif;
+}
+
+.nav {
+  font-size: 2rem;
+  position: absolute;
+  top: 2%;
+  left: 2%;
+}
+a {
+  color: black;
+  text-decoration: none;
+  padding-right: 20px;
+}
+a:hover {
+  color: rgb(9, 119, 121);
+  color: linear-gradient(90deg, rgba(9, 119, 121, 1) 0%, rgba(0, 212, 255, 1) 100%);
+  text-decoration: none;
 }
