@@ -1,0 +1,202 @@
+import { useState, createContext } from 'react';
+
+const UserContext = createContext();
+
+const UserProvider = ({ children }) => {
+  const [currentPlayer, setCurrentPlayer] = useState('X');
+  const [active, setActive] = useState(true);
+  const [gameMessage, setGameMessage] = useState('');
+  const [knotWins, setKnotWins] = useState(0);
+  const [crossWins, setCrossWins] = useState(0);
+  const [total, setTotal] = useState(0);
+
+  const [boxes, setBoxes] = useState([
+    {
+      space: 1,
+      content: '',
+    },
+    {
+      space: 2,
+      content: '',
+    },
+    {
+      space: 3,
+      content: '',
+    },
+    {
+      space: 4,
+      content: '',
+    },
+    {
+      space: 5,
+      content: '',
+    },
+    {
+      space: 6,
+      content: '',
+    },
+    {
+      space: 7,
+      content: '',
+    },
+    {
+      space: 8,
+      content: '',
+    },
+    {
+      space: 9,
+      content: '',
+    },
+  ]);
+
+  const setSpace = (space, content) => {
+    // Check if the space already contains an 'X' or 'O'
+    if (content === 'X' || content === 'O') {
+      return;
+    }
+    // Check if game is active
+    if (!active) {
+      return;
+    }
+    // Check if space are same than sets content to currentPlayer
+    setBoxes((board) => {
+      return board.map((newBox) => {
+        return newBox.space === space ? { ...newBox, content: currentPlayer } : newBox;
+      });
+    });
+    // Ternary to change currentPlayer
+    setCurrentPlayer(currentPlayer === 'X' ? 'O' : 'X');
+  };
+
+  const resetGame = () => {
+    setBoxes((resetBoard) => {
+      return resetBoard.map((box) => {
+        return { ...box, content: '' };
+      });
+    });
+
+    setGameMessage('');
+    setCurrentPlayer('X');
+    setActive(true);
+  };
+
+  const checkGame = () => {
+    if (!active) return;
+    const winner = checkWinner();
+    if (winner) {
+      setActive(false);
+      setGameMessage(`${winner} wins`);
+      setTotal((total) => total + 1);
+    } else {
+      const checkCatsGame = boxes.every((box) => box.content);
+      if (checkCatsGame) {
+        setActive(false);
+        setGameMessage('Cats game!');
+        setTotal((total) => total + 1);
+      }
+    }
+  };
+
+  const checkWinner = () => {
+    // horizontal x
+    if (boxes[0].content === 'X' && boxes[1].content === 'X' && boxes[2].content === 'X') {
+      setCrossWins((crossWins) => crossWins + 1);
+      return 'X';
+    }
+    if (boxes[3].content === 'X' && boxes[4].content === 'X' && boxes[5].content === 'X') {
+      setCrossWins((crossWins) => crossWins + 1);
+      return 'X';
+    }
+    if (boxes[6].content === 'X' && boxes[7].content === 'X' && boxes[8].content === 'X') {
+      setCrossWins((crossWins) => crossWins + 1);
+      return 'X';
+    }
+    // vertical x
+    if (boxes[0].content === 'X' && boxes[3].content === 'X' && boxes[6].content === 'X') {
+      setCrossWins((crossWins) => crossWins + 1);
+      return 'X';
+    }
+    if (boxes[1].content === 'X' && boxes[4].content === 'X' && boxes[7].content === 'X') {
+      setCrossWins((crossWins) => crossWins + 1);
+      return 'X';
+    }
+    if (boxes[2].content === 'X' && boxes[5].content === 'X' && boxes[8].content === 'X') {
+      setCrossWins((crossWins) => crossWins + 1);
+      return 'X';
+    }
+    // diagonal  x
+    if (boxes[0].content === 'X' && boxes[4].content === 'X' && boxes[8].content === 'X') {
+      setCrossWins((crossWins) => crossWins + 1);
+      return 'X';
+    }
+    if (boxes[2].content === 'X' && boxes[4].content === 'X' && boxes[6].content === 'X') {
+      setCrossWins((crossWins) => crossWins + 1);
+      return 'X';
+    }
+
+    // horizontal o
+    if (boxes[0].content === 'O' && boxes[1].content === 'O' && boxes[2].content === 'O') {
+      setKnotWins((knotWins) => knotWins + 1);
+      return 'O';
+    }
+    if (boxes[3].content === 'O' && boxes[4].content === 'O' && boxes[5].content === 'O') {
+      setKnotWins((knotWins) => knotWins + 1);
+      return 'O';
+    }
+    if (boxes[6].content === 'O' && boxes[7].content === 'O' && boxes[8].content === 'O') {
+      setKnotWins((knotWins) => knotWins + 1);
+      return 'O';
+    }
+    // vertical o
+    if (boxes[0].content === 'O' && boxes[3].content === 'O' && boxes[6].content === 'O') {
+      setKnotWins((knotWins) => knotWins + 1);
+      return 'O';
+    }
+    if (boxes[1].content === 'O' && boxes[4].content === 'O' && boxes[7].content === 'O') {
+      setKnotWins((knotWins) => knotWins + 1);
+      return 'O';
+    }
+    if (boxes[2].content === 'O' && boxes[5].content === 'O' && boxes[8].content === 'O') {
+      setKnotWins((knotWins) => knotWins + 1);
+      return 'O';
+    }
+    // diagonal  o
+    if (boxes[0].content === 'O' && boxes[4].content === 'O' && boxes[8].content === 'O') {
+      setKnotWins((knotWins) => knotWins + 1);
+      return 'O';
+    }
+    if (boxes[2].content === 'O' && boxes[4].content === 'O' && boxes[6].content === 'O') {
+      setKnotWins((knotWins) => knotWins + 1);
+      return 'O';
+    }
+
+    return;
+  };
+
+  checkGame();
+
+  return (
+    <UserContext.Provider
+      value={{
+        boxes,
+        setBoxes,
+        currentPlayer,
+        setCurrentPlayer,
+        active,
+        setActive,
+        gameMessage,
+        setGameMessage,
+        setSpace,
+        checkGame,
+        resetGame,
+        knotWins,
+        crossWins,
+        total,
+      }}
+    >
+      {children}
+    </UserContext.Provider>
+  );
+};
+
+export { UserProvider, UserContext };

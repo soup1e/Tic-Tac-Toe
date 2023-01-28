@@ -1,0 +1,56 @@
+@import url('https://fonts.googleapis.com/css2?family=Raleway:wght@300;400&display=swap');
+
+.board-container {
+  height: 50vh;
+  width: 50vh;
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-columns: 1fr 1fr 1fr;
+  margin: 0 auto;
+  padding-bottom: 40px;
+}
+
+.stats-container {
+  height: 50vh;
+  width: 50vh;
+}
+
+.outline {
+  display: flex;
+  justify-content: center;
+  flex-flow: column wrap;
+  background-color: #8bc6ec;
+  background-image: linear-gradient(135deg, #8bc6ec 0%, #9599e2 100%);
+  box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.3);
+  width: fit-content;
+  padding: 30px;
+  border-radius: 15px;
+}
+
+.header {
+  font-weight: 300;
+  font-size: 3.5rem;
+  margin: 0;
+}
+
+.winner {
+  font-weight: 400;
+  font-size: 2rem;
+  margin: 0;
+}
+
+.turn {
+  font-weight: 400;
+}
+
+li {
+  font-size: 3rem;
+  padding: 20px;
+  font-weight: 300;
+}
+
+ul {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
